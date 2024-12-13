@@ -19,3 +19,10 @@ Sorry but thats all
 |------|-------------|---------|
 | autopress_enter | This setting is responsible for auto-pressing Enter after translation | True |
 | language | Notification language (ru or en) | en
+
+## Installation
+```
+git clone https://github.com/argoarsiks/FunPay-Helper.git
+cd FunPay-Helper
+pip install -r requirements.txt
+```
