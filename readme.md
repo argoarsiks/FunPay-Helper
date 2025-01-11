@@ -1,4 +1,4 @@
-# Assistant for FunPay V 0.1
+# Assistant for FunPay V 0.2
 
 ## Functions
 
