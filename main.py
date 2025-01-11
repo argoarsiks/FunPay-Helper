@@ -1,26 +1,42 @@
 import pyperclip
 import keyboard
-from translate import Translator
-import time
-import pyautogui
-from config import autopress_enter, language
+from core import translate
+import pyautogui as pg
+import config
 
-if language == 'ru':
-    print(f'Выберите действие:\n'
-    f'1: Запуск на F2, для автопервода')
-elif language == 'en':
-    print(f'Select an action:\n'
-    f'1: Start on F2, for auto drive')
 
-while True:
-    translator = Translator(from_lang='ru', to_lang='en')
-    if keyboard.is_pressed('F2'):
-        pasted_text = pyperclip.paste()
-        text_parts = [pasted_text[i:i + 500] for i in range(0, len(pasted_text), 500)]
-        for idx, part in enumerate(text_parts, start=1):
-            translated_part = translator.translate(part)
-            copy_text = pyperclip.copy(translated_part)
-            pyautogui.hotkey('ctrl', 'v')
-        if autopress_enter == True:
-            pyautogui.press('enter')
-        time.sleep(0.1)
+def translator():
+    text = pyperclip.paste()
+    result_text = translate(text)
+    pyperclip.copy(result_text)
+    pg.hotkey('ctrl', 'v')
+
+
+def main():
+    print("""
+███████╗██╗░░░██╗███╗░░██╗██████╗░░█████╗░██╗░░░██╗██╗░░██╗███████╗██╗░░░░░██████╗░███████╗██████╗░
+██╔════╝██║░░░██║████╗░██║██╔══██╗██╔══██╗╚██╗░██╔╝██║░░██║██╔════╝██║░░░░░██╔══██╗██╔════╝██╔══██╗
+█████╗░░██║░░░██║██╔██╗██║██████╔╝███████║░╚████╔╝░███████║█████╗░░██║░░░░░██████╔╝█████╗░░██████╔╝
+██╔══╝░░██║░░░██║██║╚████║██╔═══╝░██╔══██║░░╚██╔╝░░██╔══██║██╔══╝░░██║░░░░░██╔═══╝░██╔══╝░░██╔══██╗
+██║░░░░░╚██████╔╝██║░╚███║██║░░░░░██║░░██║░░░██║░░░██║░░██║███████╗███████╗██║░░░░░███████╗██║░░██║
+╚═╝░░░░░░╚═════╝░╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░░░░╚══════╝╚═╝░░╚═╝
+          \n\n""")
+    if config.launguage not in ['en', 'ru']:
+        print('Select language: en or ru:')
+        language = input().strip()
+        with open("config.py", "w", encoding="utf-8") as config_file:
+            config_file.write(f"launguage = '{language}'\n")
+    elif config.launguage == 'ru':      
+        print(f'Список команд:\n'
+            f'F2: Перевод текста\n'
+            f'ESC: Выход')
+    elif config.launguage == 'en':
+        print(f'Command list:\n'
+            f'F2: Translate text\n'
+            f'ESC: Exit')
+    keyboard.add_hotkey('F2', translator)
+    keyboard.wait('esc')                
+
+
+if __name__ == '__main__':
+    main()
