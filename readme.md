@@ -7,7 +7,7 @@ Sorry but thats all
 
 ## In development
 
-[🛠️] Optimization
+[✅] Optimization
 
 [🛠️] Adding many different functions
 
