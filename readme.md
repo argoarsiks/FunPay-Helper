@@ -18,4 +18,5 @@ Sorry but thats all
 git clone https://github.com/argoarsiks/FunPay-Helper.git
 cd FunPay-Helper
 pip install -r requirements.txt
+python main.py
 ```
