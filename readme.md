@@ -13,13 +13,6 @@ Sorry but thats all
 
 [🛠️] Graphical interface
 
-## Config
-
-| Name | Description | Default |
-|------|-------------|---------|
-| autopress_enter | This setting is responsible for auto-pressing Enter after translation | True |
-| language | Notification language (ru or en) | en
-
 ## Installation
 ```
 git clone https://github.com/argoarsiks/FunPay-Helper.git
